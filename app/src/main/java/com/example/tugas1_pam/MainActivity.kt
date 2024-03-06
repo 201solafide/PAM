@@ -1,46 +1,25 @@
-package com.example.tugas1_pam
-
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.tugas1_pam.ui.theme.Tugas1_PAMTheme
+import android.view.View
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            Tugas1_PAMTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+        setContentView(R.layout.activity_main)
+
+        val submitButton: Button = findViewById(R.id.submitButton)
+        submitButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, SecondActivity::class.java)
+
+            intent.putExtra("nama", "Nama: " + etNama.text.toString())
+            intent.putExtra("email", "Email: " + etEmail.text.toString())
+            intent.putExtra("nomor", "Nomor HP: " + etNomor.text.toString())
+            intent.putExtra("jenisKelamin", "Jenis Kelamin: " + jenisKelamin)
+
+            startActivity(intent)
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Tugas1_PAMTheme {
-        Greeting("Android")
     }
 }
